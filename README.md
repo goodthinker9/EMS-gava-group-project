@@ -173,7 +173,7 @@ ems/
 | Name     | Role                        | Branch Name                  | ID           |
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-kalid-database       | wour/1105/16 |
-| Member 2 | Authentication & Service    | feature-member2-auth         | wour/0000/16 |
+|Amir | Authentication & Service    | feature-member2-auth         | wour/0000/16 |
 | Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
 | Member 4 | Department, Attendance & Leave | feature-member4-department | wour/0000/16 |
 | Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |

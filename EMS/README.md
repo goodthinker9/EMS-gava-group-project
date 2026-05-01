@@ -42,8 +42,8 @@ The system allows management of employees, departments, payroll, attendance, and
 ```
 ems/
 ├── database/                           → SQL scripts
-│   ├── schema.sql          ← Member 1 (Kalid)
-│   ├── migrate.sql         ← Member 1 (Kalid)
+│   ├── schema.sql          ← kalid (Kalid)
+│   ├── migrate.sql         ← kalid (Kalid)
 │   └── reset_and_rebuild.sql
 │
 ├── lib/
@@ -55,30 +55,30 @@ ems/
 │   ├── Main.java
 │   │
 │   ├── database/                       → Utilities (DB connection)
-│   │   └── DBConnection.java           ← Member 1 (Kalid)
+│   │   └── DBConnection.java           ← kalid (Kalid)
 │   │
 │   ├── models/                         → Data classes
-│   │   ├── User.java                   ← Member 1
-│   │   ├── Employee.java               ← Member 1
-│   │   ├── Department.java             ← Member 1
-│   │   ├── Payroll.java                ← Member 1
-│   │   ├── Attendance.java             ← Member 1
-│   │   └── LeaveRequest.java           ← Member 1
+│   │   ├── User.java                   ← kalid
+│   │   ├── Employee.java               ← kalid
+│   │   ├── Department.java             ← kalid
+│   │   ├── Payroll.java                ← kalid
+│   │   ├── Attendance.java             ← kalid
+│   │   └── LeaveRequest.java           ← kalid
 │   │
 │   ├── services/                       → Business logic
-│   │   ├── AuthService.java            ← Member 2
-│   │   ├── EmployeeService.java        ← Member 2
-│   │   ├── DepartmentService.java      ← Member 2
+│   │   ├── AuthService.java            ← amir
+│   │   ├── EmployeeService.java        ← amir
+│   │   ├── DepartmentService.java      ← amir
 │   │   ├── PayrollService.java         ← Member 3
 │   │   ├── AttendanceService.java      ← Member 4
 │   │   └── LeaveService.java           ← Member 4
 │   │
 │   └── ui/                             → User interface
 │       ├── UIUtils.java                ← Member 5
-│       ├── LoginFrame.java             ← Member 2
+│       ├── LoginFrame.java             ← amir
 │       ├── AdminDashboard.java         ← Member 3
 │       ├── EmployeeDashboard.java      ← Member 4
-│       ├── EmployeeFormDialog.java     ← Member 2
+│       ├── EmployeeFormDialog.java     ← amir
 │       ├── PayrollPanel.java           ← Member 3
 │       ├── SearchPanel.java            ← Member 3
 │       ├── AttendancePanel.java        ← Member 4
@@ -115,7 +115,7 @@ ems/
 
 ---
 
-### Member 2 — Authentication & Service
+### amir — Authentication & Service
 **Branch:** `feature-member2-auth` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
@@ -173,7 +173,7 @@ ems/
 | Name     | Role                        | Branch Name                  | ID           |
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-member1-database       | wour/0000/16 |
-| Member 2 | Authentication & Service    | feature-member2-auth         | wour/0000/16 |
+| amir | Authentication & Service    | feature-member2-auth         | wour/0000/16 |
 | Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
 | Member 4 | Department, Attendance & Leave | feature-member4-department | wour/0000/16 |
 | Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |
@@ -200,9 +200,9 @@ ems/
 
 | Table | Description | Owner |
 |---|---|---|
-| `users` | Login credentials and roles | Member 1 |
-| `departments` | Department list | Member 1 |
-| `employees` | Employee profiles | Member 1 |
+| `users` | Login credentials and roles | kalid |
+| `departments` | Department list | kalid |
+| `employees` | Employee profiles | kalid |
 | `payroll` | Monthly salary records | Member 3 |
 | `attendance` | Daily attendance per employee | Member 4 |
 | `leave_requests` | Leave applications and approvals | Member 4 |

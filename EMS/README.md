@@ -69,18 +69,18 @@ ems/
 │   │   ├── AuthService.java            ← amir
 │   │   ├── EmployeeService.java        ← amir
 │   │   ├── DepartmentService.java      ← amir
-│   │   ├── PayrollService.java         ← Member 3
+│   │   ├── PayrollService.java         ← esknder
 │   │   ├── AttendanceService.java      ← Keriya
 │   │   └── LeaveService.java           ← Keriya
 │   │
 │   └── ui/                             → User interface
 │       ├── UIUtils.java                ← Member 5
 │       ├── LoginFrame.java             ← amir
-│       ├── AdminDashboard.java         ← Member 3
+│       ├── AdminDashboard.java         ← esknder
 │       ├── EmployeeDashboard.java      ← Keriya
 │       ├── EmployeeFormDialog.java     ← amir
-│       ├── PayrollPanel.java           ← Member 3
-│       ├── SearchPanel.java            ← Member 3
+│       ├── PayrollPanel.java           ← esknder
+│       ├── SearchPanel.java            ← esknder
 │       ├── AttendancePanel.java        ← Keriya
 │       ├── LeaveRequestPanel.java      ← Keriya
 │       ├── LeaveApprovalPanel.java     ← Member 5
@@ -128,7 +128,7 @@ ems/
 
 ---
 
-### Member 3 — Admin Dashboard & Payroll
+### esknder — Admin Dashboard & Payroll
 **Branch:** `feature-member3-employee` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
@@ -174,7 +174,7 @@ ems/
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-member1-database       | wour/0000/16 |
 | amir | Authentication & Service    | feature-member2-auth         | wour/0000/16 |
-| Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
+| esknder | Admin Dashboard & Payroll   | feature-esknder-employee     | wour/0720/16 |
 | Keriya | Department, Attendance & Leave | feature-member4-department | wour/0000/16 |
 | Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |
 
@@ -203,7 +203,7 @@ ems/
 | `users` | Login credentials and roles | kalid |
 | `departments` | Department list | kalid |
 | `employees` | Employee profiles | kalid |
-| `payroll` | Monthly salary records | Member 3 |
+| `payroll` | Monthly salary records | esknder |
 | `attendance` | Daily attendance per employee | Keriya |
 | `leave_requests` | Leave applications and approvals | Keriya |
 

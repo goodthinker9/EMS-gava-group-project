@@ -73,7 +73,7 @@ ems/
 │   │   └── LeaveService.java           ← Keriya
 │   │
 │   └── ui/                             → User interface
-│       ├── UIUtils.java                ← Member 5
+│       ├── UIUtils.java                ← Rehima
 │       ├── LoginFrame.java             ← amir
 │       ├── AdminDashboard.java         ← Member 3
 │       ├── EmployeeDashboard.java      ← Keriya
@@ -82,10 +82,10 @@ ems/
 │       ├── SearchPanel.java            ← Member 3
 │       ├── AttendancePanel.java        ← Keriya
 │       ├── LeaveRequestPanel.java      ← Keriya
-│       ├── LeaveApprovalPanel.java     ← Member 5
-│       ├── AnalyticsPanel.java         ← Member 5
-│       ├── BarChartPanel.java          ← Member 5
-│       └── PieChartPanel.java          ← Member 5
+│       ├── LeaveApprovalPanel.java     ← Rehima
+│       ├── AnalyticsPanel.java         ← Rehima
+│       ├── BarChartPanel.java          ← Rehima
+│       └── PieChartPanel.java          ← Rehima
 │
 ├── .classpath
 ├── .project
@@ -152,7 +152,7 @@ ems/
 
 ---
 
-### Member 5 — UI/UX Design & Analytics
+### Rehima — UI/UX Design & Analytics
 **Branch:** `feature-member5-ui` | **ID:** wour/0000/16
 
 - **Folder:** `src/ui/`
@@ -163,7 +163,7 @@ ems/
   - `PieChartPanel.java` — custom donut pie chart (no external library)
   - `LeaveApprovalPanel.java` — admin leave approval panel
 
-> ⚠️ **UIUtils.java is shared by all members.** Only Member 5 should edit it.
+> ⚠️ **UIUtils.java is shared by all members.** Only Rehima should edit it.
 
 ---
 
@@ -175,7 +175,7 @@ ems/
 |Amir | Authentication & Service    | feature-amir-auth         | wour/0236/16 |
 | Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
 | Keriya | Department, Attendance & Leave | feature-keriya-department | wour/4170/16 |
-| Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |
+| Rehima | UI/UX & Analytics           | feature-Rehima-ui           | wour/1624/16 |
 
 ---
 

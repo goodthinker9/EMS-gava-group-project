@@ -127,7 +127,7 @@ ems/
 
 ---
 
-### Member 3 — Admin Dashboard & Payroll
+### esknder — Admin Dashboard & Payroll
 **Branch:** `feature-member3-employee` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
@@ -173,7 +173,7 @@ ems/
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-kalid-database       | wour/1105/16 |
 |Amir | Authentication & Service    | feature-amir-auth         | wour/0236/16 |
-| Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
+| esknder | Admin Dashboard & Payroll   | feature-esknder-Admin Dashboard & Payroll     | wour/0720/16 |
 | Member 4 | Department, Attendance & Leave | feature-member4-department | wour/0000/16 |
 | Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |
 

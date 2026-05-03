@@ -173,7 +173,7 @@ ems/
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-kalid-database       | wour/1105/16 |
 |Amir | Authentication & Service    | feature-amir-auth         | wour/0236/16 |
-| esknder | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
+| esknder | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0720/16 |
 | Keriya | Department, Attendance & Leave | feature-keriya-department | wour/4170/16 |
 | Rehima | UI/UX & Analytics           | feature-Rehima-ui           | wour/1624/16 |
 

@@ -128,7 +128,7 @@ ems/
 ---
 
 ### esknder — Admin Dashboard & Payroll
-**Branch:** `feature-member3-employee` | **ID:** wour/0000/16
+**Branch:** `feature-esknder-employee` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
 - **Tasks:**
@@ -173,7 +173,7 @@ ems/
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-kalid-database       | wour/1105/16 |
 |Amir | Authentication & Service    | feature-amir-auth         | wour/0236/16 |
-| esknder | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0720/16 |
+| esknder | Admin Dashboard & Payroll   | feature-esknder-employee     | wour/0720/16 |
 | Keriya | Department, Attendance & Leave | feature-keriya-department | wour/4170/16 |
 | Rehima | UI/UX & Analytics           | feature-Rehima-ui           | wour/1624/16 |
 
@@ -215,7 +215,7 @@ main          ← stable, working code only
   └── dev     ← integration branch (merge here first)
         ├── feature-kalid-database
         ├── feature-member2-auth
-        ├── feature-member3-employee
+        ├── feature-esknder-employee
         ├── feature-member4-department
         └── feature-member5-ui
 ```

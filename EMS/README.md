@@ -129,7 +129,7 @@ ems/
 ---
 
 ### esknder — Admin Dashboard & Payroll
-**Branch:** `feature-member3-employee` | **ID:** wour/0000/16
+**Branch:** `feature-esknder-employee` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
 - **Tasks:**
@@ -216,7 +216,7 @@ main          ← stable, working code only
   └── dev     ← integration branch (merge here first)
         ├── feature-kalid-database
         ├── feature-member2-auth
-        ├── feature-member3-employee
+        ├── feature-esknder-employee
         ├── feature-member4-department
         └── feature-member5-ui
 ```

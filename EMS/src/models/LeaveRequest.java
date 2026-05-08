@@ -1,21 +1,18 @@
 package models;
 
-/**
- * Model representing a row in the `leave_requests` table.
- */
 public class LeaveRequest {
 
     public enum Status { PENDING, APPROVED, REJECTED }
 
     private int    id;
     private int    empId;
-    private String empName;      // from JOIN
+    private String empName;      
     private String leaveType;
-    private String startDate;    // "YYYY-MM-DD"
-    private String endDate;      // "YYYY-MM-DD"
+    private String startDate;    
+    private String endDate;     
     private String reason;
     private Status status;
-    private String appliedOn;    // "YYYY-MM-DD HH:mm:ss"
+    private String appliedOn;    
     private String reviewedOn;
 
     public LeaveRequest() {}

@@ -1,20 +1,16 @@
 package models;
 
 import java.math.BigDecimal;
-
-/**
- * Model representing a row in the `payroll` table.
- */
 public class Payroll {
 
     private int        id;
     private int        empId;
-    private String     empName;    // from JOIN – display only
+    private String     empName;    
     private String     payMonth;
     private BigDecimal salary;
     private BigDecimal bonus;
     private BigDecimal deduction;
-    private BigDecimal netSalary;  // computed by DB: salary + bonus - deduction
+    private BigDecimal netSalary; 
 
     public Payroll() {}
 
@@ -31,7 +27,8 @@ public class Payroll {
         this.netSalary = netSalary;
     }
 
-    // ── Getters & Setters ────────────────────────────────────
+
+    // ── Getters & Setters Methods────────────────────────────────────
 
     public int        getId()                  { return id; }
     public void       setId(int id)            { this.id = id; }

@@ -6,7 +6,7 @@ A full-featured desktop application built with **Java Swing** and **MySQL (MAMP)
 
 ## Project Description
 
-This is a Java-based Employee Management System developed as a group project.  
+This is a Java-based Employee Management System developed as a group project.
 The system allows management of employees, departments, payroll, attendance, and leave requests with role-based access for Admin and Employee users.
 
 ---
@@ -68,24 +68,24 @@ ems/
 │   │   ├── AuthService.java            ← amir
 │   │   ├── EmployeeService.java        ← amir
 │   │   ├── DepartmentService.java      ← amir
-│   │   ├── PayrollService.java         ← Member 3
-│   │   ├── AttendanceService.java      ← Member 4
-│   │   └── LeaveService.java           ← Member 4
+│   │   ├── PayrollService.java         ← esknder
+│   │   ├── AttendanceService.java      ← Keriya
+│   │   └── LeaveService.java           ← Keriya
 │   │
 │   └── ui/                             → User interface
-│       ├── UIUtils.java                ← Member 5
+│       ├── UIUtils.java                ← Rehima
 │       ├── LoginFrame.java             ← amir
-│       ├── AdminDashboard.java         ← Member 3
-│       ├── EmployeeDashboard.java      ← Member 4
+│       ├── AdminDashboard.java         ← esknder
+│       ├── EmployeeDashboard.java      ← Keriya
 │       ├── EmployeeFormDialog.java     ← amir
-│       ├── PayrollPanel.java           ← Member 3
-│       ├── SearchPanel.java            ← Member 3
-│       ├── AttendancePanel.java        ← Member 4
-│       ├── LeaveRequestPanel.java      ← Member 4
-│       ├── LeaveApprovalPanel.java     ← Member 5
-│       ├── AnalyticsPanel.java         ← Member 5
-│       ├── BarChartPanel.java          ← Member 5
-│       └── PieChartPanel.java          ← Member 5
+│       ├── PayrollPanel.java           ← esknder
+│       ├── SearchPanel.java            ← esknder
+│       ├── AttendancePanel.java        ← Keriya
+│       ├── LeaveRequestPanel.java      ← Keriya
+│       ├── LeaveApprovalPanel.java     ← Rehima
+│       ├── AnalyticsPanel.java         ← Rehima
+│       ├── BarChartPanel.java          ← Rehima
+│       └── PieChartPanel.java          ← Rehima
 │
 ├── .classpath
 ├── .project
@@ -127,8 +127,8 @@ ems/
 
 ---
 
-### Member 3 — Admin Dashboard & Payroll
-**Branch:** `feature-member3-employee` | **ID:** wour/0000/16
+### esknder — Admin Dashboard & Payroll
+**Branch:** `feature-esknder-employee` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
 - **Tasks:**
@@ -139,7 +139,7 @@ ems/
 
 ---
 
-### Member 4 — Department, Attendance & Leave
+### Keriya — Department, Attendance & Leave
 **Branch:** `feature-member4-department` | **ID:** wour/0000/16
 
 - **Folder:** `src/services/`, `src/ui/`
@@ -152,7 +152,7 @@ ems/
 
 ---
 
-### Member 5 — UI/UX Design & Analytics
+### Rehima — UI/UX Design & Analytics
 **Branch:** `feature-member5-ui` | **ID:** wour/0000/16
 
 - **Folder:** `src/ui/`
@@ -163,7 +163,7 @@ ems/
   - `PieChartPanel.java` — custom donut pie chart (no external library)
   - `LeaveApprovalPanel.java` — admin leave approval panel
 
-> ⚠️ **UIUtils.java is shared by all members.** Only Member 5 should edit it.
+> ⚠️ **UIUtils.java is shared by all members.** Only Rehima should edit it.
 
 ---
 
@@ -173,9 +173,9 @@ ems/
 |----------|-----------------------------|------------------------------|--------------|
 | Kalid    | Database & Utility          | feature-kalid-database       | wour/1105/16 |
 |Amir | Authentication & Service    | feature-amir-auth         | wour/0236/16 |
-| Member 3 | Admin Dashboard & Payroll   | feature-member3-employee     | wour/0000/16 |
-| Member 4 | Department, Attendance & Leave | feature-member4-department | wour/0000/16 |
-| Member 5 | UI/UX & Analytics           | feature-member5-ui           | wour/0000/16 |
+| esknder | Admin Dashboard & Payroll   | feature-esknder-employee     | wour/0720/16 |
+| Keriya | Department, Attendance & Leave | feature-keriya-department | wour/4170/16 |
+| Rehima | UI/UX & Analytics           | feature-Rehima-ui           | wour/1624/16 |
 
 ---
 
@@ -202,9 +202,9 @@ ems/
 | `users` | Login credentials and roles | kalid |
 | `departments` | Department list | kalid |
 | `employees` | Employee profiles | kalid |
-| `payroll` | Monthly salary records | Member 3 |
-| `attendance` | Daily attendance per employee | Member 4 |
-| `leave_requests` | Leave applications and approvals | Member 4 |
+| `payroll` | Monthly salary records | esknder |
+| `attendance` | Daily attendance per employee | Keriya |
+| `leave_requests` | Leave applications and approvals | Keriya |
 
 ---
 
@@ -215,7 +215,7 @@ main          ← stable, working code only
   └── dev     ← integration branch (merge here first)
         ├── feature-kalid-database
         ├── feature-member2-auth
-        ├── feature-member3-employee
+        ├── feature-esknder-employee
         ├── feature-member4-department
         └── feature-member5-ui
 ```

@@ -216,8 +216,7 @@ public class AnalyticsPanel extends JPanel {
 
         return card;
     }
-
-    // ── Data loading ──────────────────────────────────────────
+    ─
 
     public void loadAll() {
         SwingUtilities.invokeLater(() -> {
@@ -275,9 +274,9 @@ public class AnalyticsPanel extends JPanel {
             deptPieChart.setData(new LinkedHashMap<>());
         }
     }
-
+// UI updated by Rehima
     private void loadDeptSalaryChart() {
-        try {
+        try {s
             LinkedHashMap<String, BigDecimal> raw = payService.getSalaryByDepartment();
             LinkedHashMap<String, Double> chartData = new LinkedHashMap<>();
             raw.forEach((k, v) -> chartData.put(k, v.doubleValue()));

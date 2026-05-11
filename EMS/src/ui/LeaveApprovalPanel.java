@@ -338,4 +338,276 @@ public class LeaveApprovalPanel extends JPanel {
         JOptionPane.showMessageDialog(this, new JScrollPane(ta),
                 "Leave Request Details", JOptionPane.INFORMATION_MESSAGE);
     }
+}package ui; // package name
+
+import models.LeaveRequest; // importing LeaveRequest model class
+import services.LeaveService; // importing LeaveService class
+
+import javax.swing.*; // importing Swing components
+import javax.swing.border.EmptyBorder; // importing EmptyBorder for spacing
+import javax.swing.table.DefaultTableCellRenderer; // importing table cell renderer
+import javax.swing.table.DefaultTableModel; // importing table model
+import java.awt.*; // importing AWT classes
+import java.util.List; // importing List interface
+
+/**
+ * Admin panel – view all leave requests, approve or reject them.
+ */
+public class LeaveApprovalPanel extends JPanel { // creating LeaveApprovalPanel class extending JPanel
+
+    private final LeaveService leaveService = new LeaveService(); // creating LeaveService object
+
+    private DefaultTableModel tableModel; // table model for JTable
+    private JTable table; // table component
+    private JLabel pendingBadge; // label showing pending requests count
+    private JComboBox<String> filterCombo; // combo box for filtering requests
+
+    public LeaveApprovalPanel() { // constructor
+
+        setLayout(new BorderLayout(0, 16)); // setting panel layout
+        setBackground(UIUtils.BG); // setting background color
+        setBorder(new EmptyBorder(20, 24, 20, 24)); // setting outer padding
+
+        add(buildHeader(), BorderLayout.NORTH); // adding header panel
+        add(buildTable(), BorderLayout.CENTER); // adding table panel
+        add(buildActions(), BorderLayout.SOUTH); // adding action buttons panel
+
+        loadRequests(); // loading leave requests into table
+    }
+
+    // ───────────────── HEADER SECTION ─────────────────
+
+    private JPanel buildHeader() { // method to build header section
+
+        JPanel p = new JPanel(new BorderLayout(0, 8)); // creating header panel
+        p.setOpaque(false); // making panel transparent
+
+        // TITLE ROW
+
+        JPanel titleRow = new JPanel(new BorderLayout()); // panel for title row
+        titleRow.setOpaque(false); // transparent panel
+
+        JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0)); // left side panel
+        left.setOpaque(false); // transparent
+
+        JLabel title = new JLabel("🏖 Leave Approval"); // title label
+        title.setFont(UIUtils.FONT_TITLE); // setting title font
+        title.setForeground(UIUtils.text()); // setting title color
+
+        left.add(title); // adding title to left panel
+
+        // PENDING BADGE
+
+        pendingBadge = new JLabel("0 pending"); // creating pending badge label
+        pendingBadge.setFont(UIUtils.FONT_SUBHEAD); // setting font
+        pendingBadge.setForeground(Color.WHITE); // text color
+        pendingBadge.setBackground(UIUtils.WARNING); // background color
+        pendingBadge.setOpaque(true); // enabling background color
+        pendingBadge.setBorder(new EmptyBorder(3, 10, 3, 10)); // padding
+
+        left.add(pendingBadge); // adding badge to left panel
+
+        titleRow.add(left, BorderLayout.WEST); // adding left panel to title row
+
+        // RIGHT SIDE PANEL
+
+        JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0)); // right side panel
+        right.setOpaque(false); // transparent
+
+        right.add(UIUtils.formLabel("Filter:")); // adding filter label
+
+        filterCombo = new JComboBox<>(new String[]{
+                "All",
+                "Pending",
+                "Approved",
+                "Rejected"
+        }); // creating combo box with filter options
+
+        filterCombo.setFont(UIUtils.FONT_BODY); // setting font
+        filterCombo.setBackground(UIUtils.inputBg()); // background color
+        filterCombo.setPreferredSize(new Dimension(130, 36)); // setting size
+
+        filterCombo.addActionListener(e -> loadRequests()); // reload table when selection changes
+
+        right.add(filterCombo); // adding combo box to right panel
+
+        // REFRESH BUTTON
+
+        JButton refreshBtn = UIUtils.successButton("↻ Refresh"); // creating refresh button
+        refreshBtn.setPreferredSize(new Dimension(100, 36)); // button size
+
+        refreshBtn.addActionListener(e -> loadRequests()); // reload data on click
+
+        right.add(refreshBtn); // adding button to panel
+
+        titleRow.add(right, BorderLayout.EAST); // adding right panel
+
+        p.add(titleRow, BorderLayout.NORTH); // adding title row to header
+
+        // ADDING STATISTICS ROW
+
+        p.add(buildStatsRow(), BorderLayout.CENTER);
+
+        return p; // returning header panel
+    }
+
+    // ───────────────── STATS ROW ─────────────────
+
+    private JPanel buildStatsRow() {
+
+        JPanel row = new JPanel(new GridLayout(1, 3, 14, 0)); // creating grid layout
+        row.setOpaque(false); // transparent
+        row.setPreferredSize(new Dimension(0, 80)); // row size
+
+        // ADDING MINI STAT CARDS
+
+        row.add(buildMiniStat("⏳ Pending", "—", UIUtils.WARNING));
+        row.add(buildMiniStat("✅ Approved", "—", UIUtils.ACCENT));
+        row.add(buildMiniStat("❌ Rejected", "—", UIUtils.DANGER));
+
+        return row; // returning row
+    }
+
+    // ───────────────── MINI STAT CARD ─────────────────
+
+    private JPanel buildMiniStat(String label, String value, Color color) {
+
+        JPanel card = new JPanel(new BorderLayout(0, 4)); // creating card panel
+
+        card.setBackground(UIUtils.card()); // card background
+
+        card.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(UIUtils.border(), 1, true),
+                        new EmptyBorder(10, 16, 10, 16)
+                )
+        ); // card border and padding
+
+        JLabel lbl = new JLabel(label); // stat title label
+        lbl.setFont(UIUtils.FONT_SMALL); // font
+        lbl.setForeground(UIUtils.textMuted()); // text color
+
+        JLabel val = new JLabel(value); // stat value label
+        val.setFont(new Font("Segoe UI", Font.BOLD, 22)); // font
+        val.setForeground(color); // text color
+        val.setName(label); // setting component name
+
+        card.add(lbl, BorderLayout.NORTH); // adding label
+        card.add(val, BorderLayout.CENTER); // adding value
+
+        return card; // returning card
+    }
+
+    // ───────────────── TABLE SECTION ─────────────────
+
+    private JPanel buildTable() {
+
+        JPanel card = UIUtils.cardPanel(); // creating card panel
+        card.setLayout(new BorderLayout(0, 10)); // layout
+
+        // TABLE COLUMN NAMES
+
+        String[] cols = {
+                "ID",
+                "Employee",
+                "Leave Type",
+                "From",
+                "To",
+                "Days",
+                "Reason",
+                "Status",
+                "Applied On"
+        };
+
+        // CREATING TABLE MODEL
+
+        tableModel = new DefaultTableModel(cols, 0) {
+
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false; // making table non-editable
+            }
+        };
+
+        // CREATING TABLE
+
+        table = new JTable(tableModel);
+
+        UIUtils.styleTable(table); // applying custom style
+
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // single row selection
+
+        // SETTING COLUMN WIDTHS
+
+        table.getColumnModel().getColumn(0).setPreferredWidth(40);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
+        table.getColumnModel().getColumn(2).setPreferredWidth(120);
+        table.getColumnModel().getColumn(3).setPreferredWidth(100);
+        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+        table.getColumnModel().getColumn(5).setPreferredWidth(50);
+        table.getColumnModel().getColumn(6).setPreferredWidth(200);
+        table.getColumnModel().getColumn(7).setPreferredWidth(110);
+        table.getColumnModel().getColumn(8).setPreferredWidth(130);
+
+        // STATUS COLUMN COLOR RENDERER
+
+        table.getColumnModel().getColumn(7).setCellRenderer(
+                new DefaultTableCellRenderer() {
+
+                    @Override
+                    public Component getTableCellRendererComponent(
+                            JTable t,
+                            Object value,
+                            boolean sel,
+                            boolean focus,
+                            int row,
+                            int col
+                    ) {
+
+                        super.getTableCellRendererComponent(
+                                t, value, sel, focus, row, col
+                        );
+
+                        setBorder(new EmptyBorder(0, 10, 0, 10));
+
+                        if (!sel) {
+
+                            String v = value == null ? "" : value.toString();
+
+                            Color bg = row % 2 == 0
+                                    ? UIUtils.card()
+                                    : UIUtils.tableAlt();
+
+                            setBackground(bg);
+
+                            setForeground(
+                                    switch (v) {
+                                        case "✅ Approved" -> UIUtils.ACCENT;
+                                        case "❌ Rejected" -> UIUtils.DANGER;
+                                        default -> UIUtils.WARNING;
+                                    }
+                            );
+
+                            setFont(UIUtils.FONT_SUBHEAD);
+                        }
+
+                        return this;
+                    }
+                }
+        );
+
+        // SCROLL PANE
+
+        JScrollPane scroll = new JScrollPane(table);
+
+        scroll.setBorder(
+                BorderFactory.createLineBorder(UIUtils.border(), 1, true)
+        );
+
+        scroll.getViewport().setBackground(UIUtils.card());
+
+        card.add(scroll, BorderLayout.CENTER);
+
+        return card;
+    }
 }

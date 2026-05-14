@@ -1,82 +1,68 @@
-package ui; // package name
+package ui;
 
-import services.EmployeeService; // importing EmployeeService
-import services.PayrollService; // importing PayrollService
-import services.DepartmentService; // importing DepartmentService
+import services.EmployeeService;
+import services.PayrollService;
+import services.DepartmentService;
 
-import javax.swing.*; // importing Swing components
-import javax.swing.border.EmptyBorder; // importing EmptyBorder
-import javax.swing.table.DefaultTableModel; // importing table model
-import java.awt.*; // importing AWT classes
-import java.math.BigDecimal; // importing BigDecimal for money calculations
-import java.sql.SQLException; // importing SQLException
-import java.util.LinkedHashMap; // importing LinkedHashMap
-import java.util.Map; // importing Map
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-/**
- * Analytics & Reports panel for the Admin Dashboard.
- */
-public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
+public class AnalyticsPanel extends JPanel {
 
-    // creating service objects
     private final EmployeeService empService = new EmployeeService();
     private final PayrollService payService = new PayrollService();
     private final DepartmentService deptService = new DepartmentService();
 
-    // KPI labels
     private JLabel kpiEmpCount;
     private JLabel kpiTotalPaid;
     private JLabel kpiAvgSalary;
     private JLabel kpiDeptCount;
 
-    // Chart panels
     private BarChartPanel monthlyBarChart;
     private PieChartPanel deptPieChart;
     private BarChartPanel deptSalaryBarChart;
 
-    // Table model
     private DefaultTableModel deptTableModel;
 
-    // constructor
     public AnalyticsPanel() {
 
-        setLayout(new BorderLayout()); // setting layout
-        setBackground(UIUtils.BG); // setting background color
+        setLayout(new BorderLayout());
+        setBackground(UIUtils.BG);
 
-        // building content panel
         JPanel content = buildContent();
 
-        // creating scroll pane
         JScrollPane scroll = new JScrollPane(content);
 
-        scroll.setBorder(BorderFactory.createEmptyBorder()); // removing border
+        scroll.setBorder(BorderFactory.createEmptyBorder());
 
-        scroll.getVerticalScrollBar().setUnitIncrement(16); // smooth scrolling
+        scroll.getVerticalScrollBar().setUnitIncrement(16);
 
         scroll.setHorizontalScrollBarPolicy(
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
-        ); // disabling horizontal scroll
+        );
 
-        scroll.getViewport().setBackground(UIUtils.BG); // viewport background
+        scroll.getViewport().setBackground(UIUtils.BG);
 
-        add(scroll, BorderLayout.CENTER); // adding scroll pane
+        add(scroll, BorderLayout.CENTER);
 
-        loadAll(); // loading all analytics data
+        loadAll();
     }
-
-    // ───────────────── CONTENT PANEL ─────────────────
 
     private JPanel buildContent() {
 
-        JPanel p = new JPanel(); // creating main panel
+        JPanel p = new JPanel();
 
-        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS)); // vertical layout
+        p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
 
-        p.setBackground(UIUtils.BG); // background color
+        p.setBackground(UIUtils.BG);
 
-        p.setBorder(new EmptyBorder(20, 24, 24, 24)); // padding
-
-        // ───────── HEADER ROW ─────────
+        p.setBorder(new EmptyBorder(20, 24, 24, 24));
 
         JPanel headerRow = new JPanel(new BorderLayout());
 
@@ -94,7 +80,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         headerRow.add(title, BorderLayout.WEST);
 
-        // refresh button
         JButton refreshBtn = UIUtils.successButton("↻ Refresh");
 
         refreshBtn.setPreferredSize(new Dimension(110, 34));
@@ -111,18 +96,13 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         headerRow.add(btnWrap, BorderLayout.EAST);
 
-        // adding components
         p.add(headerRow);
 
         p.add(Box.createVerticalStrut(16));
 
-        // ───────── KPI CARDS ─────────
-
         p.add(buildKpiRow());
 
         p.add(Box.createVerticalStrut(20));
-
-        // ───────── CHART ROW 1 ─────────
 
         JPanel chartsRow1 = new JPanel(
                 new GridLayout(1, 2, 16, 0)
@@ -134,7 +114,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
                 new Dimension(Integer.MAX_VALUE, 300)
         );
 
-        // creating charts
         monthlyBarChart = new BarChartPanel(
                 "Monthly Salary Expense",
                 "$"
@@ -151,8 +130,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         p.add(chartsRow1);
 
         p.add(Box.createVerticalStrut(16));
-
-        // ───────── CHART ROW 2 ─────────
 
         JPanel chartsRow2 = new JPanel(
                 new GridLayout(1, 1, 0, 0)
@@ -175,16 +152,12 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         p.add(Box.createVerticalStrut(20));
 
-        // ───────── TABLE ─────────
-
         p.add(buildDeptTable());
 
         p.add(Box.createVerticalStrut(8));
 
-        return p; // returning panel
+        return p;
     }
-
-    // ───────────────── KPI ROW ─────────────────
 
     private JPanel buildKpiRow() {
 
@@ -198,7 +171,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
                 new Dimension(Integer.MAX_VALUE, 100)
         );
 
-        // creating KPI labels
         kpiEmpCount = kpiLabel("0");
 
         kpiTotalPaid = kpiLabel("$0");
@@ -207,7 +179,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         kpiDeptCount = kpiLabel("0");
 
-        // adding KPI cards
         row.add(
                 buildKpiCard(
                         "Total Employees",
@@ -247,7 +218,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         return row;
     }
 
-    // method to create KPI label
     private JLabel kpiLabel(String text) {
 
         JLabel l = new JLabel(text);
@@ -256,8 +226,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         return l;
     }
-
-    // ───────────────── KPI CARD ─────────────────
 
     private JPanel buildKpiCard(
             String title,
@@ -309,7 +277,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         card.add(valueLabel, BorderLayout.CENTER);
 
-        // accent border bottom
         JPanel accent2 = new JPanel();
 
         accent2.setBackground(accent);
@@ -320,8 +287,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         return card;
     }
-
-    // ───────────────── CHART WRAPPER ─────────────────
 
     private JPanel wrapChart(JPanel chart) {
 
@@ -345,8 +310,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         return card;
     }
 
-    // ───────────────── DEPARTMENT TABLE ─────────────────
-
     private JPanel buildDeptTable() {
 
         JPanel card = UIUtils.cardPanel();
@@ -363,7 +326,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         card.add(title, BorderLayout.NORTH);
 
-        // table columns
         String[] cols = {
                 "Department",
                 "Employees",
@@ -371,12 +333,11 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
                 "Avg Salary"
         };
 
-        // creating table model
         deptTableModel = new DefaultTableModel(cols, 0) {
 
             @Override
             public boolean isCellEditable(int r, int c) {
-                return false; // disabling editing
+                return false;
             }
         };
 
@@ -384,7 +345,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
 
         UIUtils.styleTable(table);
 
-        // setting widths
         table.getColumnModel().getColumn(0).setPreferredWidth(200);
 
         table.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -410,8 +370,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         return card;
     }
 
-    // ───────────────── LOAD ALL DATA ─────────────────
-
     public void loadAll() {
 
         SwingUtilities.invokeLater(() -> {
@@ -427,8 +385,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
             loadDeptTable();
         });
     }
-
-    // ───────────────── LOAD KPI DATA ─────────────────
 
     private void loadKpis() {
 
@@ -466,7 +422,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
                     String.format("$%,.0f", total)
             );
 
-            // calculating average salary
             int payCount = payService
                     .getAllPayroll()
                     .size();
@@ -492,8 +447,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         }
     }
 
-    // ───────────────── LOAD MONTHLY CHART ─────────────────
-
     private void loadMonthlyChart() {
 
         try {
@@ -517,8 +470,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
             );
         }
     }
-
-    // ───────────────── LOAD PIE CHART ─────────────────
 
     private void loadDeptPieChart() {
 
@@ -544,10 +495,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
         }
     }
 
-    // UI updated by Rehima
-
-    // ───────────────── LOAD DEPARTMENT SALARY CHART ─────────────────
-
     private void loadDeptSalaryChart() {
 
         try {
@@ -571,8 +518,6 @@ public class AnalyticsPanel extends JPanel { // creating AnalyticsPanel class
             );
         }
     }
-
-    // ───────────────── LOAD TABLE DATA ─────────────────
 
     private void loadDeptTable() {
 
